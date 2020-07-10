@@ -57,6 +57,7 @@ class Book (models.Model):
     
     genre = models.ManyToManyField(Genre, help_text='Seleccione un genero para este libro')
     language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
+    objects = models.Manager() # deshacerse de esa advertencia Vsc class has not object
     
     def display_genre(self):
         """
@@ -97,7 +98,7 @@ class BookInstance(models.Model):
     imprint = models.CharField(max_length=2000)
     due_back = models.DateField(null=True, blank=True)
    # borrower = models.ForeignKey('User', on_delete=models.SET_NULL, null=True, blank=True)
-
+    objects = models.Manager()
 
     #
     LOAN_STATUS = (
@@ -135,7 +136,7 @@ class Author(models.Model):
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
     date_of_death = models.DateField('Died', null=True, blank=True)
-
+    objects = models.Manager()
     def get_absolute_url(self):
         '''
          Retorna la url para acceder a una instancia particular de un autor.
