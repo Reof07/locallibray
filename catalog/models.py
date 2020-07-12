@@ -137,6 +137,7 @@ class Author(models.Model):
     date_of_birth = models.DateField(null=True, blank=True)
     date_of_death = models.DateField('Died', null=True, blank=True)
     objects = models.Manager()
+    
     def get_absolute_url(self):
         '''
          Retorna la url para acceder a una instancia particular de un autor.
