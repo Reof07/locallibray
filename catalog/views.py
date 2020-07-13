@@ -11,6 +11,12 @@ def index(request):
     """
     Función vista para la página inicio del sitio.
     """
+    """
+    obtener el numero de veces que se visita la pagina
+    """
+    # Number of visits to this view, as counted in the session variable.
+    num_visits= request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits+1
 
     #Generando contadores de alguno objetos especiales.
     num_books = Book.objects.all().count
@@ -22,7 +28,7 @@ def index(request):
     # Renderiza la plantilla HTML index.html con los datos en la variable contexto
     return render(request,
         'index.html',
-        context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors},
+        context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors, 'num_visits':num_visits},
         )
 
 class BookListView(generic.ListView):
